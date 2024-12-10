@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-writable-component/static/css/main.f855e6bc.css",
+    "main.js": "/react-writable-component/static/js/main.e9c13579.js",
+    "static/js/488.40001c2f.chunk.js": "/react-writable-component/static/js/488.40001c2f.chunk.js",
+    "index.html": "/react-writable-component/index.html",
+    "main.f855e6bc.css.map": "/react-writable-component/static/css/main.f855e6bc.css.map",
+    "main.e9c13579.js.map": "/react-writable-component/static/js/main.e9c13579.js.map",
+    "488.40001c2f.chunk.js.map": "/react-writable-component/static/js/488.40001c2f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.e9c13579.js"
+  ]
+}
