@@ -35,16 +35,33 @@ const FileEditor = () => {
   };
 
   const handleSaveFile = async () => {
-    if (!fileHandle) return;
-
     try {
-      const writable = await fileHandle.createWritable();
-      await writable.write(fileContent);
-      await writable.close();
-      alert("File saved successfully!");
-      setFileName("");
-      setFileContent("");
-      setIsModified(false);
+      if (fileHandle) {
+        // Save to existing file
+        const writable = await fileHandle.createWritable();
+        await writable.write(fileContent);
+        await writable.close();
+        alert("File saved successfully!");
+        setIsModified(false);
+      } else {
+        // Save as a new file
+        const handle = await window.showSaveFilePicker({
+          suggestedName: fileName || "newfile.txt",
+          types: [
+            {
+              description: "Text Files",
+              accept: { "text/plain": [".txt"] },
+            },
+          ],
+        });
+        const writable = await handle.createWritable();
+        await writable.write(fileContent);
+        await writable.close();
+        setFileHandle(handle);
+        setFileName(handle.name);
+        alert("File saved successfully!");
+        setIsModified(false);
+      }
     } catch (err) {
       console.error("Error saving file:", err);
     }
@@ -56,7 +73,7 @@ const FileEditor = () => {
   };
 
   return (
-    <Container maxWidth="sm" >
+    <Container maxWidth="sm">
       <Box sx={{ textAlign: "center", mt: 5 }}>
         <Typography variant="h6" gutterBottom>
           Selected File Name: {fileName || "None"}
@@ -68,7 +85,7 @@ const FileEditor = () => {
           <Button
             variant="outlined"
             onClick={handleSaveFile}
-            disabled={!isModified}
+            disabled={!fileContent}
           >
             Save file
           </Button>
